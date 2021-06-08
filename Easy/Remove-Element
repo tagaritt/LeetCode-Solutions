@@ -1,0 +1,39 @@
+/* 
+Task: 
+Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+
+Clarification:
+Confused why the returned value is an integer but your answer is an array?
+Note that the input array is passed in by reference, which means a modification to the input array will be known to the caller as well.
+*/
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        // ***ERROR HANDLING***
+        // If an empty array is passed, return nothing.
+        if (nums == null || nums.length == 0) { return 0; }
+        
+        // ***VARIABLE DECLARATION***
+        // Initialize variables that counts the elements post-value removal and the location of the value to be removed.
+        int cnt_excl_val = 0;
+        int idx_of_val = 0;
+        
+        // ***FOR LOOP***
+        // The for loop analyzes every element in the array.
+        for (int i = 0; i < nums.length; i++) {
+            // If the value to be removed is found, skip this index.
+            if (nums[i] == val) {
+                continue;
+            // If the value to be removed isn't found, replace the first available index with the value at the current index.
+            } else {
+                nums[idx_of_val] = nums[i];
+                cnt_excl_val++;
+            }
+            idx_of_val++;
+        }
+        
+        return cnt_excl_val;
+    }
+}
