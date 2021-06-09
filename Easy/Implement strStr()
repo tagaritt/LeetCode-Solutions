@@ -1,0 +1,40 @@
+/*
+TASK:
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+CLARIFICATION:
+What should we return when needle is an empty string? This is a great question to ask during an interview.
+For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
+*/
+
+class Solution {
+    public int strStr(String haystack, String needle) {
+        // *** ERROR HANDLING ***
+        // If the "needle" string can't even fit inside the "haystack" string. 
+        if (needle.length() > haystack.length()) { return -1; }
+        // If either of the strings are empty.
+		if (haystack.length() == 0 || haystack == null || needle.length() == 0 || needle == null) { return 0; }
+		// If the strings are the exact same.
+        if (needle.length() == haystack.length() && needle.equals(haystack)) { return 0; }
+		
+        // FOR LOOP: Examines every element in the string. 
+        // Takes away the size of the "needle" string, because the "haystack" can be searched to a point where the "needle" wouldn't even fit.
+        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+			if (haystack.substring(i, i + needle.length()).equals(needle)) { return i; }
+		}
+        
+        // DEFAULT: triggered if nothing is found.
+		return -1;
+    }
+}
+
+/*
+***FURTHER EXPLANATION***
+The following line "haystack.substring(i, needle.length() + i).equals(needle)" evaluates as follows:
+
+haystack                                <-- Sets up the string to be analyzed.
+.substring(i, needle.length() + i)      <-- Checks for substrings.
+.equals(needle)                         <-- Checks whether "needle" is a substring of "haystack" or not.
+
+.substring(x, y) evaluates the string where x is the starting point (the current index) and y is the length of the substring desired added to current index, as it is referring to the location of the substring not the length.
+*/
